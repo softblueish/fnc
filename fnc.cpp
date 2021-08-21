@@ -8,20 +8,22 @@ int main(int argc, char **argv){
 	// Creates output for getline()
 	std::string outputStr;
 	
-	// Opens file
-	std::fstream file(argv[1]);
+	// For loop to open files in order
+	for(int i = 1; i <= argc; i++){ 
 
-	// While loop that checks if the file has ended and if a file has been opened
-	while(!file.eof()&&file.is_open()){
+		// Opens a file
+		std::fstream file(argv[i]);
+	
+		// While loop that checks if the file has ended and if a file has been opened
+		while(!file.eof()&&file.is_open()){
 		
-		// Reads line and outputs it to the variable outputStr
-		getline(file, outputStr);
+			// Reads line and outputs it to the variable outputStr
+			getline(file, outputStr);
 
-		// Prints outputStr
-		std::cout << outputStr << std::endl;
+			// Prints outputStr
+			std::cout << outputStr << std::endl;
+		}
 	};
 	
-	// Closes file
-	file.close();
 	return 0;
 }
