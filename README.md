@@ -19,5 +19,5 @@ sudo make install
 ## Usage
 
 ```bash
-fnc <file>
+fnc <file1> <file2> <file3...
 ```
