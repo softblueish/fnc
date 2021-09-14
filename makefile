@@ -1,5 +1,5 @@
 fnc:
-	g++ -o fnc ./fnc.cpp
+	g++ -fno-rtti -fno-exceptions -s -Os -o fnc ./fnc.cpp
 install:
 	cp fnc /bin/fnc
 clean:
