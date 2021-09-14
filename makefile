@@ -1,9 +1,9 @@
 fnc:
 	g++ -o fnc ./fnc.cpp
 install:
-	cp fnc /bin/fnc
+	cp fnc /usr/local/bin/fnc
 clean:
 	rm fnc
 uninstall:
-	rm /bin/fnc
+	rm /usr/local/bin/fnc
 
