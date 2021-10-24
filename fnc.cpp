@@ -12,7 +12,7 @@ int main(int argc, char **argv){
 	for(int i = 1; i <= argc; i++){ 
 
 		// Opens a file
-		file = std::fstream(argv[i]);
+        std::ifstream file(argv[i]);
 	
 		// While loop that checks if the file has ended and if a file has been opened
 		while(!file.eof()&&file.is_open()){
