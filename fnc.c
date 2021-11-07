@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#define FNC_VERSION 1.0
+
 int main(int argc, char** argv)
 {
 
