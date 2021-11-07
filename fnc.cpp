@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+#define FNC_VERSION 1.0
+
 // Main program
 int main(int argc, char **argv){
 	
