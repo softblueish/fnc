@@ -1,5 +1,5 @@
 # FNC is not CAT
-FNC is an barebones recreation of GNU CAT in C++ that removes unecessary options, which could be useful if you need to shave down a system to the kilobytes.
+FNC is a collection of barebones recreations of GNU CAT in different languages that aims to remove unecessary options and be shaved down to the kilobytes.
 
 ## Prequisites
 You need these packages to install this software
@@ -7,7 +7,7 @@ You need these packages to install this software
 coreutils
 ```
 
-## Installation
+## Installation C++ version
 You can install FNC with make
 
 ```bash
