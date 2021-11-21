@@ -23,6 +23,14 @@ git clone https://github.com/InfinityFloof/fnc.git
 make linux64
 ```
 
+## Build C version
+You can install FNC C with make
+
+```bash
+git clone https://github.com/InfinityFloof/fnc.git
+make c
+```
+
 ## Install built version
 
 ```bash
