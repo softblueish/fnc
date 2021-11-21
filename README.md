@@ -15,6 +15,14 @@ git clone https://github.com/InfinityFloof/fnc.git
 make
 ```
 
+## Build ASM version
+You can install FNC Assembly with make
+
+```bash
+git clone https://github.com/InfinityFloof/fnc.git
+make linux64
+```
+
 ## Install built version
 
 ```bash
