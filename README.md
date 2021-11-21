@@ -7,12 +7,17 @@ You need these packages to install this software
 coreutils
 ```
 
-## Installation C++ version
-You can install FNC with make
+## Build C++ version
+You can install FNC C++ with make
 
 ```bash
 git clone https://github.com/InfinityFloof/fnc.git
 make
+```
+
+## Install built version
+
+```bash
 sudo make install
 ```
 
