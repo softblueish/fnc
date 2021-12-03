@@ -1,34 +1,28 @@
 #include <stdio.h>
-#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-int main(int argc, char** argv)
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 2048
+#endif
+
+int main(int argc, const char **argv)
 {
+    char buffer[BUFFER_SIZE];
+    int fd;
+    ssize_t n;
 
-    if (argc == 1)
-    {
-        puts("Arguments must be given!");
-        printf("Usage: %s <file1> <file2> <file3...\n", argv[0]);
-
-        return -1;
+    if (argc == 1) {
+        printf("Arguments must be given!\n"
+               "Usage: %s [FILE]...\n", argv[0]);
+        return 1;
     }
-
-    char* output;
-    FILE* file;
-    
-    for (int i = 1; i <= argc; i++)
-    {
-        file = fopen(argv[i], "r");
-        
-        if (file != NULL)
-        {
-            while(feof(file) == 0)
-            {
-                size_t size = strlen(argv[i]);
-                getline(&output, &size, file);
-            
-                printf("%s\n", output);
-            }
-            fclose(file);
+    for (ssize_t i = 1; i < argc; i++) {
+        fd = open(argv[i], O_RDONLY);
+        if (fd != -1) {
+            while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)
+                write(STDOUT_FILENO, buffer, n);
+            close(fd);
         }
     }
 }
