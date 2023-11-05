@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -6,23 +5,44 @@
 #define BUFFER_SIZE 2048
 #endif
 
-int main(int argc, const char **argv)
+#define likely(x) __builtin_expect((x), 1)
+#define unlikely(x) __builtin_expect((x), 0)
+
+static int write_file_to_fd(int read_fd)
 {
     char buffer[BUFFER_SIZE];
-    int fd;
-    ssize_t n;
+    ssize_t read_bytes;
 
-    if (argc == 1) {
-        printf("Arguments must be given!\n"
-               "Usage: %s [FILE]...\n", argv[0]);
+    for (;;) {
+        read_bytes = read(read_fd, buffer, BUFFER_SIZE);
+        if (unlikely(!read_bytes))
+            return 0;
+        if (unlikely(read_bytes == -1))
+            return 1;
+        if (unlikely(write(1, buffer, (size_t) read_bytes) == -1))
+            return 1;
+    }
+}
+
+static int loop_cat_files(int argc, const char **argv)
+{
+    int opened_fd;
+
+    for (int i = 1; i < argc; i++) {
+        opened_fd = open(argv[i], O_RDONLY);
+        if (unlikely(opened_fd == -1))
+            return 1;
+        write_file_to_fd(opened_fd);
+        close(opened_fd);
+    }
+    return 0;
+}
+
+int main(int argc, const char **argv)
+{
+    if (argc < 1)
         return 1;
-    }
-    for (ssize_t i = 1; i < argc; i++) {
-        fd = open(argv[i], O_RDONLY);
-        if (fd != -1) {
-            while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)
-                write(STDOUT_FILENO, buffer, n);
-            close(fd);
-        }
-    }
+    else if (argc == 1)
+        return write_file_to_fd(0);
+    return loop_cat_files(argc, argv);
 }
